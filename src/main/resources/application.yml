@@ -1,2 +1,51 @@
 server:
   port: 9005
+
+logging:
+  level:
+    com.study.maven.newbee: debug
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.10.31:3306/newbee_mall_db_v2?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+    # hikari数据库连接池
+    hikari:
+      minimum-idle: 5           # 最小空闲连接数量
+      idle-timeout: 180000      # 空闲连接存活最大时间，默认600000（10分钟）
+      maximum-pool-size: 15      # 连接池最大连接数，默认是10
+      auto-commit: true         # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      max-lifetime: 1800000     # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      connection-timeout: 30000  # 数据库连接超时时间,默认30秒，即30000
+      connection-test-query: SELECT 1 # 测试连接诶使用
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.study.maven.newbee.entity
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+
+# jwt Token
+jwt:
+  secret: test@Login(Auth}*^31)&test% # 登录校验的密钥
+  pubKeyPath: D:\\rsa\\rsa.pub # 公钥地址
+  priKeyPath: D:\\rsa\\rsa.pri # 私钥地址
+  expire:  1440 # 过期时间,单位分钟 因为不支持刷新，给1天
+
+# idWork
+idworker:
+  datacenterId: 1
+  workerId: 1
+
